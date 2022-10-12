@@ -1,0 +1,26 @@
+.questionaire__container .title {
+  text-align: center;
+  margin-top: 20px;
+}
+.questionaire__container .search__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 20px;
+  border: 1.5px solid rgba(0, 0, 0, 0.6666666667);
+  width: 30vw;
+  padding: 5px 15px;
+}
+.questionaire__container .search__container:focus-within {
+  border-color: #3498db;
+}
+.questionaire__container .search__container input {
+  border: none;
+  flex: 1;
+  font-size: 17px;
+  padding: 8px;
+}
+.questionaire__container .search__container input:focus {
+  outline: none;
+}/*# sourceMappingURL=style.css.map */

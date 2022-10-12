@@ -1,0 +1,32 @@
+.questionaire__container{
+    .title{
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .search__container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        margin-top: 20px;
+        border: 1.5px solid #000a;
+        width: 30vw;
+        padding: 5px 15px;
+    
+        &:focus-within{
+          border-color: #3498db;
+        }
+    
+        input{
+          border: none;
+          flex: 1;
+          font-size: 17px;
+          padding: 8px;
+    
+          &:focus{
+            outline: none;
+          }
+        }
+      }
+}
