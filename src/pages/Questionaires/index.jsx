@@ -16,7 +16,6 @@ export default function Questionaires() {
 
     const fuse = new Fuse(QuestionairesList, options);
     const result = fuse.search(e.target.value);
-    console.log(result);
     setFilteredQuestionaires(result);
   };
 
