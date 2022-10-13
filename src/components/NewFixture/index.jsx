@@ -16,9 +16,6 @@ import "./styles/style.css";
 export default function NewFixture() {
   const [value, setValue] = React.useState(null);
 
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
   return (
     <div className="newFixture__container">
       <h1 className="header">New Fixture</h1>
