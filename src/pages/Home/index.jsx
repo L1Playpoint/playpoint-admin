@@ -2,6 +2,9 @@ import React from "react";
 import "./styles/style.css";
 
 export default function Home() {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="home__container">
       <h1 className="greeting__container">Good Morning, Domsan! 😇</h1>

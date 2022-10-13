@@ -3,6 +3,9 @@ import React from "react";
 import "./styles/style.css";
 
 export default function Questionaires() {
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="questionaire__container">
       <h1 className="title">Active Questionaires</h1>

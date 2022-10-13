@@ -11,7 +11,7 @@ import Results from "./pages/Results";
 
 export default function App() {
   return (
-    <div className="app__container">
+    <div className="app__container">  
       <Topbar/>
       <Navbar />
       <Routes>
