@@ -3,9 +3,12 @@ import React from "react";
 import Marketplaces from "../../mocks/Marketplaces.json";
 import "./styles/style.css";
 import Fuse from "fuse.js";
+import { useNavigate } from "react-router-dom";
+
 export default function Markteplaces() {
   const [marketplaces, setMarketplaces] = React.useState(Marketplaces);
   const [filteredMarketplaces, setFilteredMarketplaces] = React.useState([]);
+  const navigate = useNavigate();
 
   const filter = (e) => {
     const options = {
@@ -35,7 +38,10 @@ export default function Markteplaces() {
       </div>
 
       <div className="marketplaces__items">
-        <Button className="marketplace__item newMarketplace">
+        <Button
+          className="marketplace__item newMarketplace"
+          onClick={() => navigate("/marketplaces/new")}
+        >
           <i className="ri-add-line"></i>
           <Typography variant="p">New Marketplaces</Typography>
         </Button>
@@ -43,9 +49,14 @@ export default function Markteplaces() {
         {filteredMarketplaces.length > 0
           ? filteredMarketplaces.map((data, index) => (
               <div className="marketplace__item" key={index}>
-                <img src={data?.item?.marketplaceCoverImage} alt="" loading="lazy" />
+                <img
+                  src={data?.item?.marketplaceCoverImage}
+                  alt=""
+                  loading="lazy"
+                />
                 <Typography variant="p">
-                  <i className="ri-gamepad-line"></i> {data?.item?.marketplaceName}
+                  <i className="ri-gamepad-line"></i>{" "}
+                  {data?.item?.marketplaceName}
                 </Typography>
                 <ul>
                   <li>
