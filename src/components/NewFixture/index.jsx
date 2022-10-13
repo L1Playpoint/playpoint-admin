@@ -8,11 +8,9 @@ import {
   TextField,
 } from "@mui/material";
 import React from "react";
-import {
-  AdapterDayjs,
-  DatePicker,
-  LocalizationProvider,
-} from "@mui/x-date-pickers/AdapterDayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "./styles/style.css";
 
 export default function NewFixture() {
