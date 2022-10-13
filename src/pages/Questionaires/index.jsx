@@ -1,8 +1,24 @@
 import { Button, Typography } from "@mui/material";
 import React from "react";
+import QuestionairesList from "../../mocks/Questionaires.json";
 import "./styles/style.css";
+import Fuse from "fuse.js";
 
 export default function Questionaires() {
+  const [questionaires, setQuestionaires] = React.useState(QuestionairesList);
+  const [filteredQuestionaires, setFilteredQuestionaires] = React.useState([]);
+
+  const filter = (e) => {
+    const options = {
+      includeScore: true,
+      keys: ["questions", "marketplaceSlug"],
+    };
+
+    const fuse = new Fuse(QuestionairesList, options);
+    const result = fuse.search(e.target.value);
+    setFilteredQuestionaires(result);
+  };
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -12,7 +28,7 @@ export default function Questionaires() {
 
       <div className="search__container">
         <i className="ri-search-line"></i>{" "}
-        <input type="text" placeholder="Search Questionaires..." />
+        <input onChange={filter} type="text" placeholder="Search Questionaires..." />
       </div>
 
       <div className="questionaire__items">
@@ -21,24 +37,59 @@ export default function Questionaires() {
           <Typography variant="p">New Questionaire</Typography>
         </Button>
 
-        {
-          [0,1,2,3,4,5,6,7,8,9,10].map(data => {
-            return <div className="questionaire__item" key={data}>
-              <div className="marketplaceSlug"><b>Marketplace</b>: worldcup-2022</div>
-              <div className="fixture"><b>Fixture</b>: Brazil vs Qatar</div>
+        {filteredQuestionaires.length > 0
+          ? filteredQuestionaires.map((data, index) => {
+              return (
+                <div className="questionaire__item" key={index}>
+                  <div className="marketplaceSlug">
+                    <b>Marketplace</b>: {data?.item?.marketplaceSlug}
+                  </div>
+                  <div className="fixture">
+                    <b>Fixture</b>: {data?.item?.fixtureId}
+                  </div>
 
-              <ul>
-                <li>What will be the exact score?</li>
-                <li>How many offsides for brazil & qatar in total?</li>
-                <li>Will Neymar fall more than 10 times?</li>
-              </ul>
-              <div className="actions">
-              <Button className="editBtn"><i className="ri-settings-line"></i> Edit</Button>
-              <Button className="deleteBtn"><i className="ri-delete-bin-5-line"></i> Delete</Button>
-            </div>
-            </div>
-          })
-        }
+                  <ul>
+                    {data?.item?.questions.map((question, index) => {
+                      return <li key={index}>{question}</li>;
+                    })}
+                  </ul>
+                  <div className="actions">
+                    <Button className="editBtn">
+                      <i className="ri-settings-line"></i> Edit
+                    </Button>
+                    <Button className="deleteBtn">
+                      <i className="ri-delete-bin-5-line"></i> Delete
+                    </Button>
+                  </div>
+                </div>
+              );
+            })
+          : questionaires.map((data, index) => {
+              return (
+                <div className="questionaire__item" key={index}>
+                  <div className="marketplaceSlug">
+                    <b>Marketplace</b>: {data.marketplaceSlug}
+                  </div>
+                  <div className="fixture">
+                    <b>Fixture</b>: {data.fixtureId}
+                  </div>
+
+                  <ul>
+                    {data.questions.map((question, index) => {
+                      return <li key={index}>{question}</li>;
+                    })}
+                  </ul>
+                  <div className="actions">
+                    <Button className="editBtn">
+                      <i className="ri-settings-line"></i> Edit
+                    </Button>
+                    <Button className="deleteBtn">
+                      <i className="ri-delete-bin-5-line"></i> Delete
+                    </Button>
+                  </div>
+                </div>
+              );
+            })}
       </div>
     </div>
   );

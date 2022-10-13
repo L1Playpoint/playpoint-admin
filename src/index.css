@@ -6,3 +6,9 @@
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
 }
+
+*::-webkit-scrollbar {
+  display: none;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
