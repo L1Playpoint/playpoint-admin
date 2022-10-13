@@ -8,9 +8,11 @@ import {
   TextField,
 } from "@mui/material";
 import React from "react";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import {
+  AdapterDayjs,
+  DatePicker,
+  LocalizationProvider,
+} from "@mui/x-date-pickers/AdapterDayjs";
 import "./styles/style.css";
 
 export default function NewFixture() {
@@ -83,7 +85,10 @@ export default function NewFixture() {
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DatePicker
-            label="Basic example"
+            disableFuture
+            label="Responsive"
+            openTo="year"
+            views={["year", "month", "day"]}
             value={value}
             onChange={(newValue) => {
               setValue(newValue);
