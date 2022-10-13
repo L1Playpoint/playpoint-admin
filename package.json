@@ -17,7 +17,7 @@
     "remixicon": "2.5.0"
   },
   "devDependencies": {
-    "vite": "1.0.0-rc.13",
+    "vite": "3.1.7",
     "vite-plugin-react": "4.0.1"
   }
 }
