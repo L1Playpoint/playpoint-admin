@@ -4,10 +4,12 @@ import Fixtures from "../../mocks/Fixtures.json";
 import CountryFlags from "../../mocks/CountryFlags.json";
 import "./styles/style.css";
 import Fuse from "fuse.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Fixture() {
   const [fixtures, setFixtures] = React.useState(Fixtures);
   const [filteredFixtures, setFilteredFixtures] = React.useState([]);
+  const navigate = useNavigate();
 
   const filter = (e) => {
     const options = {
@@ -33,7 +35,7 @@ export default function Fixture() {
       </div>
 
       <div className="fixture__items">
-        <Button className="fixture__item newFixture">
+        <Button className="fixture__item newFixture" onClick={() => navigate("/fixtures/new")}>
           <i className="ri-add-line"></i>
           <Typography variant="p">New Fixture</Typography>
         </Button>
