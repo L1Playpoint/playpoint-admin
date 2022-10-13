@@ -1,7 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import React from "react";
 import Fixtures from "../../mocks/Fixtures.json";
-import CountryFlags from '../../mocks/CountryFlags.json'
+import CountryFlags from "../../mocks/CountryFlags.json";
 import "./styles/style.css";
 import Fuse from "fuse.js";
 
@@ -52,42 +52,42 @@ export default function Fixture() {
                     <span className="homeTeam">
                       <p>{data?.item?.HomeTeam}</p>
                       {CountryFlags.map((country, i) => {
-                    return (
-                      (country.name === data.item.HomeTeam ||
-                        (country.name === "United States" &&
-                          data.item.HomeTeam === "USA") ||
-                        (country.name === "South Korea" &&
-                          data.item.HomeTeam === "Korea Republic")) && (
-                        <img
-                          src={country.image}
-                          alt={country.name}
-                          key={i}
-                          loading="lazy"
-                          className="home__Image"
-                        />
-                      )
-                    );
-                  })}
+                        return (
+                          (country.name === data.item.HomeTeam ||
+                            (country.name === "United States" &&
+                              data.item.HomeTeam === "USA") ||
+                            (country.name === "South Korea" &&
+                              data.item.HomeTeam === "Korea Republic")) && (
+                            <img
+                              src={country.image}
+                              alt={country.name}
+                              key={i}
+                              loading="lazy"
+                              className="home__Image"
+                            />
+                          )
+                        );
+                      })}
                     </span>
                     <span>VS</span>
                     <span className="awayTeam">
-                    {CountryFlags.map((country, i) => {
-                    return (
-                      (country.name === data.item.AwayTeam ||
-                        (country.name === "United States" &&
-                          data.item.AwayTeam === "USA") ||
-                        (country.name === "South Korea" &&
-                          data.item.AwayTeam === "Korea Republic")) && (
-                        <img
-                          src={country?.image}
-                          alt={country.name}
-                          key={i}
-                          loading="lazy"
-                          className="Away__Image"
-                        />
-                      )
-                    );
-                  })}
+                      {CountryFlags.map((country, i) => {
+                        return (
+                          (country.name === data.item.AwayTeam ||
+                            (country.name === "United States" &&
+                              data.item.AwayTeam === "USA") ||
+                            (country.name === "South Korea" &&
+                              data.item.AwayTeam === "Korea Republic")) && (
+                            <img
+                              src={country?.image}
+                              alt={country.name}
+                              key={i}
+                              loading="lazy"
+                              className="Away__Image"
+                            />
+                          )
+                        );
+                      })}
                       <p>{data?.item?.AwayTeam}</p>
                     </span>
                   </div>
@@ -131,42 +131,42 @@ export default function Fixture() {
                     <span className="homeTeam">
                       <p>{data.HomeTeam}</p>
                       {CountryFlags.map((country, i) => {
-                    return (
-                      (country.name === data.HomeTeam ||
-                        (country.name === "United States" &&
-                          data.HomeTeam === "USA") ||
-                        (country.name === "South Korea" &&
-                          data.HomeTeam === "Korea Republic")) && (
-                        <img
-                          src={country.image}
-                          alt={country.name}
-                          key={i}
-                          loading="lazy"
-                          className="home__Image"
-                        />
-                      )
-                    );
-                  })}
+                        return (
+                          (country.name === data.HomeTeam ||
+                            (country.name === "United States" &&
+                              data.HomeTeam === "USA") ||
+                            (country.name === "South Korea" &&
+                              data.HomeTeam === "Korea Republic")) && (
+                            <img
+                              src={country.image}
+                              alt={country.name}
+                              key={i}
+                              loading="lazy"
+                              className="home__Image"
+                            />
+                          )
+                        );
+                      })}
                     </span>
                     <span>VS</span>
                     <span className="awayTeam">
-                    {CountryFlags.map((country, i) => {
-                    return (
-                      (country.name === data.AwayTeam ||
-                        (country.name === "United States" &&
-                          data.AwayTeam === "USA") ||
-                        (country.name === "South Korea" &&
-                          data.AwayTeam === "Korea Republic")) && (
-                        <img
-                          src={country?.image}
-                          alt={country.name}
-                          key={i}
-                          loading="lazy"
-                          className="Away__Image"
-                        />
-                      )
-                    );
-                  })}
+                      {CountryFlags.map((country, i) => {
+                        return (
+                          (country.name === data.AwayTeam ||
+                            (country.name === "United States" &&
+                              data.AwayTeam === "USA") ||
+                            (country.name === "South Korea" &&
+                              data.AwayTeam === "Korea Republic")) && (
+                            <img
+                              src={country?.image}
+                              alt={country.name}
+                              key={i}
+                              loading="lazy"
+                              className="Away__Image"
+                            />
+                          )
+                        );
+                      })}
                       <p>{data.AwayTeam}</p>
                     </span>
                   </div>
