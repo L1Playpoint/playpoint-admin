@@ -106,3 +106,4 @@ dist
 .dccache
 *.lock
 *.lockb
+package-lock.json
