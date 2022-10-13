@@ -1,6 +1,5 @@
 import { Button, Typography } from "@mui/material";
 import React from "react";
-import { ScrollToTop } from "../../utils/ScrollToTop";
 import "./styles/style.css";
 
 export default function Fixture() {
