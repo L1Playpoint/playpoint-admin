@@ -14,6 +14,9 @@ export default function Navbar() {
       case "m":
         navigate("/marketplaces");
         break;
+      case "f":
+        navigate("/fixtures");
+        break;
       case "q":
         navigate("/questionaires");
         break;
@@ -40,6 +43,12 @@ export default function Navbar() {
         onClick={() => handleActiveTab("m")}
       >
         <i className="ri-store-2-line"></i> Marketplaces
+      </div>
+      <div
+        className={activeTab === "f" ? "active": ""}
+        onClick={() => handleActiveTab("f")}
+      >
+        <i className="ri-store-2-line"></i> Fixtures
       </div>
       <div
         className={activeTab === "q" ? "active": ""}

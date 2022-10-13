@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Topbar from "./components/Topbar";
+import Fixture from "./pages/Fixtures";
 import Home from "./pages/Home";
 import Markteplaces from "./pages/Marketplaces";
 import Questionaires from "./pages/Questionaires";
@@ -16,6 +17,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/marketplaces" element={<Markteplaces />} />
+        <Route path="/fixtures" element={<Fixture />} />
         <Route path="/questionaires" element={<Questionaires />} />
         <Route path="/results" element={<Results />} />
       </Routes>
