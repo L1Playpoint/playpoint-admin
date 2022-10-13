@@ -10,7 +10,7 @@ export default function Markteplaces() {
   const filter = (e) => {
     const options = {
       includeScore: true,
-      keys: ["tags", "marketplaceSlug"],
+      keys: ["tags", "marketplaceSlug", "marketplaceName"],
     };
 
     const fuse = new Fuse(marketplaces, options);
