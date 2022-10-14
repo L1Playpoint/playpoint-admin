@@ -14,7 +14,20 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "./styles/style.css";
 
 export default function NewFixture() {
-  const [value, setValue] = React.useState(null);
+  const [newFixtureItem, setNewFixtureItem] = React.useState({
+    HomeTeam: "",
+    AwayTeam: "",
+    HomeTeamIcon: null,
+    AwayTeamIcon: null,
+    HomeTeamScore: "",
+    AwayTeamScore: "",
+    marketplaceSlug: "",
+    MatchNumber: 0,
+    RoundNumber: 0,
+    Location: "",
+    Group: "",
+    DateUtc: null,
+  });
 
   return (
     <div className="newFixture__container">
@@ -30,24 +43,66 @@ export default function NewFixture() {
         className="newMarketplaceForm__container"
       >
         <div className="fixtureFormat">
-          <TextField id="outlined-basic" label="Home Team" variant="outlined" />
+          <TextField
+            value={newFixtureItem.HomeTeam}
+            id="outlined-basic"
+            label="Home Team"
+            variant="outlined"
+            onChange={(e) =>
+              setNewFixtureItem({ ...newFixtureItem, HomeTeam: e.target.value })
+            }
+          />
           <img
-            src="https://ik.imagekit.io/lexworld/Logo.png"
+            src={
+              newFixtureItem.HomeTeamIcon
+                ? URL.createObjectURL(newFixtureItem.HomeTeamIcon)
+                : "https://ik.imagekit.io/lexworld/Logo.png"
+            }
             alt=""
             loading="lazy"
           />
           <p>vs</p>
           <img
-            src="https://ik.imagekit.io/lexworld/Logo.png"
+            src={
+              newFixtureItem.AwayTeamIcon
+                ? URL.createObjectURL(newFixtureItem.AwayTeamIcon)
+                : "https://ik.imagekit.io/lexworld/Logo.png"
+            }
             alt=""
             loading="lazy"
           />
-          <TextField id="outlined-basic" label="Away Team" variant="outlined" />
+          <TextField
+            value={newFixtureItem.AwayTeam}
+            id="outlined-basic"
+            label="Away Team"
+            variant="outlined"
+            onChange={(e) =>
+              setNewFixtureItem({ ...newFixtureItem, AwayTeam: e.target.value })
+            }
+          />
         </div>
         <div className="imageInputs">
-          <input type="file" name="" id="" />
+          <input
+            type="file"
+            name="HomeTeamIcon"
+            onChange={(e) =>
+              setNewFixtureItem({
+                ...newFixtureItem,
+                HomeTeamIcon: e.target.files[0],
+              })
+            }
+          />
           <p>vs</p>
-          <input type="file" name="" id="" />
+          <input
+            type="file"
+            name="AwayTeamIcon"
+            onChange={(e) =>
+              setNewFixtureItem({
+                ...newFixtureItem,
+                AwayTeamIcon: e.target.files[0],
+              })
+            }
+          />
         </div>
 
         <FormControl fullWidth>
@@ -55,9 +110,14 @@ export default function NewFixture() {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            // value={age}
+            value={newFixtureItem.marketplaceSlug}
             label="Marketplace"
-            // onChange={handleChange}
+            onChange={(e) =>
+              setNewFixtureItem({
+                ...newFixtureItem,
+                marketplaceSlug: e.target.value,
+              })
+            }
           >
             <MenuItem value={10}>Ten</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
@@ -71,14 +131,36 @@ export default function NewFixture() {
             label="Match Number"
             variant="outlined"
             type="number"
+            value={newFixtureItem.MatchNumber}
+            onChange={(e) =>
+              setNewFixtureItem({
+                ...newFixtureItem,
+                MatchNumber: e.target.value,
+              })
+            }
           />
           <TextField
             id="outlined-basic"
             label="Round Number"
             variant="outlined"
             type="number"
+            value={newFixtureItem.RoundNumber}
+            onChange={(e) =>
+              setNewFixtureItem({
+                ...newFixtureItem,
+                RoundNumber: e.target.value,
+              })
+            }
           />
-          <TextField id="outlined-basic" label="Group" variant="outlined" />
+          <TextField
+            value={newFixtureItem.Group}
+            id="outlined-basic"
+            label="Group"
+            variant="outlined"
+            onChange={(e) =>
+              setNewFixtureItem({ ...newFixtureItem, Group: e.target.value })
+            }
+          />
         </div>
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -87,15 +169,26 @@ export default function NewFixture() {
             label="Responsive"
             openTo="year"
             views={["year", "month", "day"]}
-            value={value}
+            value={newFixtureItem.DateUtc}
             onChange={(newValue) => {
-              setValue(newValue);
+              setNewFixtureItem({
+                ...newFixtureItem,
+                DateUtc: newValue,
+              });
             }}
             renderInput={(params) => <TextField {...params} />}
           />
         </LocalizationProvider>
 
-        <TextField id="outlined-basic" label="Location" variant="outlined" />
+        <TextField
+          value={newFixtureItem.Location}
+          id="outlined-basic"
+          label="Location"
+          variant="outlined"
+          onChange={(e) =>
+            setNewFixtureItem({ ...newFixtureItem, Location: e.target.value })
+          }
+        />
 
         <Button className="submitBtn" type="submit">
           Submit

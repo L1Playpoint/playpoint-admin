@@ -56,6 +56,10 @@
     color: #fff;
     width: 40vw;
     padding: 10px;
+    
+    &:hover{
+      background: #2c3e50;
+    }
 
     &.submitBtn {
       background: #27ae60;
