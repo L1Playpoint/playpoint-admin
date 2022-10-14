@@ -52,6 +52,9 @@
   width: 40vw;
   padding: 10px;
 }
+.newFixture__container .MuiButton-root:hover {
+  background: #2c3e50;
+}
 .newFixture__container .MuiButton-root.submitBtn {
   background: #27ae60;
 }/*# sourceMappingURL=style.css.map */
