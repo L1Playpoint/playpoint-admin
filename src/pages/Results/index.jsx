@@ -3,10 +3,12 @@ import React from "react";
 import ResultsList from "../../mocks/Results.json";
 import Fuse from "fuse.js";
 import "./styles/style.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Results() {
   const [results, setResults] = React.useState(ResultsList);
   const [filteredResults, setFilteredResults] = React.useState([]);
+  const navigate = useNavigate()
 
   const filter = (e) => {
     const options = {
@@ -32,11 +34,6 @@ export default function Results() {
       </div>
 
       <div className="result__items">
-        <Button className="result__item newResult">
-          <i className="ri-add-line"></i>
-          <Typography variant="p">New Result</Typography>
-        </Button>
-
         {filteredResults.length > 0
           ? filteredResults.map((data, index) => {
               return (

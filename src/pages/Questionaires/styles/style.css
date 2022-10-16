@@ -80,6 +80,9 @@
 .questionaire__container .questionaire__items .questionaire__item .actions .MuiButton-root.editBtn {
   color: #0984e3;
 }
+.questionaire__container .questionaire__items .questionaire__item .actions .MuiButton-root.resultBtn {
+  color: #9b59b6;
+}
 .questionaire__container .questionaire__items .questionaire__item .actions .MuiButton-root.deleteBtn {
   color: #ff7675;
 }/*# sourceMappingURL=style.css.map */
