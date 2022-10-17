@@ -1,6 +1,5 @@
 import { Button, Typography } from "@mui/material";
 import React from "react";
-import Marketplaces from "../../mocks/Marketplaces.json";
 import "./styles/style.css";
 import Fuse from "fuse.js";
 import { useNavigate } from "react-router-dom";
@@ -25,17 +24,19 @@ export default function Markteplaces() {
 
   const handleMarketplaceDelete = async (marketplaceSlug, index) => {
     toast("Marketplace added to delete queue!");
-    setMarketplaces(marketplaces.filter(i => i.marketplaceSlug !== marketplaceSlug))
+    setMarketplaces(
+      marketplaces.filter((i) => i.marketplaceSlug !== marketplaceSlug)
+    );
     await deleteMarketplace(marketplaceSlug);
     toast("Marketplace deleted successfully!");
-  }
+  };
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
 
     (async () => {
       const res = await getMarketplaces();
-      setMarketplaces(res.data.data);
+      setMarketplaces(res.data.data.reverse());
     })();
   }, []);
   return (
@@ -91,14 +92,17 @@ export default function Markteplaces() {
                     <Button className="editBtn">
                       <i className="ri-settings-line"></i> Edit
                     </Button>
-                    <Button onClick={() => navigate("/fixtures/new")} className="editBtn">
+                    <Button
+                      onClick={() => navigate("/fixtures/new")}
+                      className="navigateBtn"
+                    >
                       <i className="ri-attachment-line"></i> Add Fixture
                     </Button>
                     <Button
-                      onClick={async () => {
-                        await deleteMarketplace(data?.item.marketplaceSlug);
-                        toast("Marketplace deleted successfully!");
-                      }}
+                      onClick={handleMarketplaceDelete(
+                        data.item.marketplaceSlug,
+                        index
+                      )}
                       className="deleteBtn"
                     >
                       <i className="ri-delete-bin-5-line"></i> Delete
@@ -135,11 +139,16 @@ export default function Markteplaces() {
                   <Button className="editBtn">
                     <i className="ri-settings-line"></i> Edit
                   </Button>
-                  <Button onClick={() => navigate("/fixtures/new")} className="editBtn">
+                  <Button
+                    onClick={() => navigate("/fixtures/new")}
+                    className="navigateBtn"
+                  >
                     <i className="ri-attachment-line"></i> Add Fixture
                   </Button>
                   <Button
-                    onClick={() => handleMarketplaceDelete(data.marketplaceSlug, index)}
+                    onClick={() =>
+                      handleMarketplaceDelete(data.marketplaceSlug, index)
+                    }
                     className="deleteBtn"
                   >
                     <i className="ri-delete-bin-5-line"></i> Delete

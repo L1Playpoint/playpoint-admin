@@ -83,6 +83,9 @@
 .marketplaces__container .marketplaces__items .marketplace__item .actions .MuiButton-root.editBtn {
   color: #0984e3;
 }
+.marketplaces__container .marketplaces__items .marketplace__item .actions .MuiButton-root.navigateBtn {
+  color: #2ecc71;
+}
 .marketplaces__container .marketplaces__items .marketplace__item .actions .MuiButton-root.deleteBtn {
   color: #ff7675;
 }
