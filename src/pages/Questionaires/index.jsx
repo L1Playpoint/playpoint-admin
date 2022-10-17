@@ -3,10 +3,12 @@ import React from "react";
 import QuestionairesList from "../../mocks/Questionaires.json";
 import "./styles/style.css";
 import Fuse from "fuse.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Questionaires() {
   const [questionaires, setQuestionaires] = React.useState(QuestionairesList);
   const [filteredQuestionaires, setFilteredQuestionaires] = React.useState([]);
+  const navigate = useNavigate();
 
   const filter = (e) => {
     const options = {
@@ -28,11 +30,18 @@ export default function Questionaires() {
 
       <div className="search__container">
         <i className="ri-search-line"></i>{" "}
-        <input onChange={filter} type="text" placeholder="Search Questionaires..." />
+        <input
+          onChange={filter}
+          type="text"
+          placeholder="Search Questionaires..."
+        />
       </div>
 
       <div className="questionaire__items">
-        <Button className="questionaire__item newQuestionaire">
+        <Button
+          className="questionaire__item newQuestionaire"
+          onClick={() => navigate("new")}
+        >
           <i className="ri-add-line"></i>
           <Typography variant="p">New Questionaire</Typography>
         </Button>
@@ -82,6 +91,12 @@ export default function Questionaires() {
                   <div className="actions">
                     <Button className="editBtn">
                       <i className="ri-settings-line"></i> Edit
+                    </Button>
+                    <Button
+                      className="resultBtn"
+                      onClick={() => navigate("/results/new")}
+                    >
+                      <i className="ri-gamepad-line"></i> Set Result
                     </Button>
                     <Button className="deleteBtn">
                       <i className="ri-delete-bin-5-line"></i> Delete

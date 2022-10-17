@@ -29,6 +29,23 @@ export default function NewFixture() {
     DateUtc: null,
   });
 
+  const resetInputs = () => {
+    setNewFixtureItem({
+      HomeTeam: "",
+      AwayTeam: "",
+      HomeTeamIcon: null,
+      AwayTeamIcon: null,
+      HomeTeamScore: "",
+      AwayTeamScore: "",
+      marketplaceSlug: "",
+      MatchNumber: 0,
+      RoundNumber: 0,
+      Location: "",
+      Group: "",
+      DateUtc: null,
+    });
+  };
+
   return (
     <div className="newFixture__container">
       <h1 className="header">New Fixture</h1>
@@ -193,7 +210,7 @@ export default function NewFixture() {
         <Button className="submitBtn" type="submit">
           Submit
         </Button>
-        <Button>Reset</Button>
+        <Button onClick={() => resetInputs()}>Reset</Button>
       </Box>
     </div>
   );

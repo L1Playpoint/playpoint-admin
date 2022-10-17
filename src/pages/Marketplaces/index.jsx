@@ -40,7 +40,7 @@ export default function Markteplaces() {
       <div className="marketplaces__items">
         <Button
           className="marketplace__item newMarketplace"
-          onClick={() => navigate("/marketplaces/new")}
+          onClick={() => navigate("new")}
         >
           <i className="ri-add-line"></i>
           <Typography variant="p">New Marketplaces</Typography>

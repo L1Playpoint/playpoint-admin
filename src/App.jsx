@@ -4,6 +4,8 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import NewFixture from "./components/NewFixture";
 import NewMarketplace from "./components/NewMarketplace";
+import NewQuestionaire from "./components/NewQuestionaire";
+import NewResult from "./components/NewResult";
 import Topbar from "./components/Topbar";
 import Fixture from "./pages/Fixtures";
 import Home from "./pages/Home";
@@ -23,7 +25,9 @@ export default function App() {
         <Route path="fixtures" element={<Fixture />} />
         <Route path="fixtures/new" element={<NewFixture />} />
         <Route path="questionaires" element={<Questionaires />} />
+        <Route path="questionaires/new" element={<NewQuestionaire />} />
         <Route path="results" element={<Results />} />
+        <Route path="results/new" element={<NewResult />} />
       </Routes>
     </div>
   );

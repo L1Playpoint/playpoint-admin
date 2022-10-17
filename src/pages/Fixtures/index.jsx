@@ -35,7 +35,7 @@ export default function Fixture() {
       </div>
 
       <div className="fixture__items">
-        <Button className="fixture__item newFixture" onClick={() => navigate("/fixtures/new")}>
+        <Button className="fixture__item newFixture" onClick={() => navigate("new")}>
           <i className="ri-add-line"></i>
           <Typography variant="p">New Fixture</Typography>
         </Button>
