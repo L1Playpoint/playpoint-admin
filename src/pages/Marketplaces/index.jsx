@@ -4,9 +4,11 @@ import Marketplaces from "../../mocks/Marketplaces.json";
 import "./styles/style.css";
 import Fuse from "fuse.js";
 import { useNavigate } from "react-router-dom";
+import { deleteMarketplace, getMarketplaces } from "../../api/Marketplace";
+import { toast } from "react-toastify";
 
 export default function Markteplaces() {
-  const [marketplaces, setMarketplaces] = React.useState(Marketplaces);
+  const [marketplaces, setMarketplaces] = React.useState([]);
   const [filteredMarketplaces, setFilteredMarketplaces] = React.useState([]);
   const navigate = useNavigate();
 
@@ -21,8 +23,20 @@ export default function Markteplaces() {
     setFilteredMarketplaces(result);
   };
 
+  const handleMarketplaceDelete = async (marketplaceSlug, index) => {
+    toast("Marketplace added to delete queue!");
+    setMarketplaces(marketplaces.filter(i => i.marketplaceSlug !== marketplaceSlug))
+    await deleteMarketplace(marketplaceSlug);
+    toast("Marketplace deleted successfully!");
+  }
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
+
+    (async () => {
+      const res = await getMarketplaces();
+      setMarketplaces(res.data.data);
+    })();
   }, []);
   return (
     <div className="marketplaces__container">
@@ -47,44 +61,59 @@ export default function Markteplaces() {
         </Button>
 
         {filteredMarketplaces.length > 0
-          ? filteredMarketplaces.map((data, index) => (
+          ? filteredMarketplaces.map((data, index) => {
+              return (
+                <div className="marketplace__item" key={index}>
+                  <img
+                    src={data?.item?.marketplaceCoverImage?.url}
+                    alt={data?.item?.marketplaceName}
+                    loading="lazy"
+                  />
+                  <Typography variant="p">
+                    <i className="ri-gamepad-line"></i>{" "}
+                    {data?.item?.marketplaceName}
+                  </Typography>
+                  <ul>
+                    <li>
+                      <b>Fixture</b>: 125
+                    </li>
+                    <li>
+                      <b>Questionaires</b>: 125
+                    </li>
+                    <li>
+                      <b>Results</b>: 125
+                    </li>
+                    <li>
+                      <b>Volume</b>: 1,25,255
+                    </li>
+                  </ul>
+                  <div className="actions">
+                    <Button className="editBtn">
+                      <i className="ri-settings-line"></i> Edit
+                    </Button>
+                    <Button onClick={() => navigate("/fixtures/new")} className="editBtn">
+                      <i className="ri-attachment-line"></i> Add Fixture
+                    </Button>
+                    <Button
+                      onClick={async () => {
+                        await deleteMarketplace(data?.item.marketplaceSlug);
+                        toast("Marketplace deleted successfully!");
+                      }}
+                      className="deleteBtn"
+                    >
+                      <i className="ri-delete-bin-5-line"></i> Delete
+                    </Button>
+                  </div>
+                </div>
+              );
+            })
+          : marketplaces.map((data, index) => (
               <div className="marketplace__item" key={index}>
                 <img
-                  src={data?.item?.marketplaceCoverImage}
+                  src={data?.marketplaceCoverImage?.url}
                   alt=""
                   loading="lazy"
                 />
-                <Typography variant="p">
-                  <i className="ri-gamepad-line"></i>{" "}
-                  {data?.item?.marketplaceName}
-                </Typography>
-                <ul>
-                  <li>
-                    <b>Fixture</b>: 125
-                  </li>
-                  <li>
-                    <b>Questionaires</b>: 125
-                  </li>
-                  <li>
-                    <b>Results</b>: 125
-                  </li>
-                  <li>
-                    <b>Volume</b>: 1,25,255
-                  </li>
-                </ul>
-                <div className="actions">
-                  <Button className="editBtn">
-                    <i className="ri-settings-line"></i> Edit
-                  </Button>
-                  <Button className="deleteBtn">
-                    <i className="ri-delete-bin-5-line"></i> Delete
-                  </Button>
-                </div>
-              </div>
-            ))
-          : marketplaces.map((data, index) => (
-              <div className="marketplace__item" key={index}>
-                <img src={data?.marketplaceCoverImage} alt="" loading="lazy" />
                 <Typography variant="p">
                   <i className="ri-gamepad-line"></i> {data?.marketplaceName}
                 </Typography>
@@ -106,7 +135,13 @@ export default function Markteplaces() {
                   <Button className="editBtn">
                     <i className="ri-settings-line"></i> Edit
                   </Button>
-                  <Button className="deleteBtn">
+                  <Button onClick={() => navigate("/fixtures/new")} className="editBtn">
+                    <i className="ri-attachment-line"></i> Add Fixture
+                  </Button>
+                  <Button
+                    onClick={() => handleMarketplaceDelete(data.marketplaceSlug, index)}
+                    className="deleteBtn"
+                  >
                     <i className="ri-delete-bin-5-line"></i> Delete
                   </Button>
                 </div>

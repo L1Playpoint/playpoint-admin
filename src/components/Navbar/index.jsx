@@ -48,7 +48,7 @@ export default function Navbar() {
         className={activeTab === "f" ? "active": ""}
         onClick={() => handleActiveTab("f")}
       >
-        <i className="ri-store-2-line"></i> Fixtures
+        <i className="ri-attachment-line"></i> Fixtures
       </div>
       <div
         className={activeTab === "q" ? "active": ""}
