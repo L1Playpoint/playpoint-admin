@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
+import EditMarketplace from "./components/Editmarketplace";
 
 import Navbar from "./components/Navbar";
 import NewFixture from "./components/NewFixture";
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/" element={<Home />}/>
         <Route path="marketplaces" element={<Markteplaces />}/>
         <Route path="marketplaces/new" element={<NewMarketplace />}/>
+        <Route path="marketplaces/edit" element={<EditMarketplace />}/>
         <Route path="fixtures" element={<Fixture />} />
         <Route path="fixtures/new" element={<NewFixture />} />
         <Route path="questionaires" element={<Questionaires />} />

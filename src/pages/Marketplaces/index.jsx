@@ -89,7 +89,10 @@ export default function Markteplaces() {
                     </li>
                   </ul>
                   <div className="actions">
-                    <Button className="editBtn">
+                    <Button
+                      className="editBtn"
+                      onClick={() => navigate("edit")}
+                    >
                       <i className="ri-settings-line"></i> Edit
                     </Button>
                     <Button
@@ -136,7 +139,13 @@ export default function Markteplaces() {
                   </li>
                 </ul>
                 <div className="actions">
-                  <Button className="editBtn">
+                  <Button
+                    className="editBtn"
+                    onClick={() => {
+                      localStorage.setItem("marketplace_for_edit", JSON.stringify(data));
+                      navigate("edit");
+                    }}
+                  >
                     <i className="ri-settings-line"></i> Edit
                   </Button>
                   <Button

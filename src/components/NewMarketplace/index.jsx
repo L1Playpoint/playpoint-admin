@@ -47,7 +47,6 @@ export default function NewMarketplace() {
     axios
       .post(import.meta.env.VITE_API_URI + "api/v1/new-marketplace", formData)
       .then((res) => {
-        console.log(res);
         setLoading(false);
         toast("Marketplace created successfully!");
 
