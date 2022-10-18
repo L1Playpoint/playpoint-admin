@@ -1,9 +1,8 @@
 import React from "react";
 import { Box, Button, TextField } from "@mui/material";
-// import "./styles/style.css";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { updateMarketplace } from "../../api/Marketplace";
 
 export default function EditMarketplace() {
   const navigate = useNavigate();
@@ -25,24 +24,20 @@ export default function EditMarketplace() {
     setEditMarketplaceItem(JSON.parse(marketplaceItem));
   }, []);
 
-  const handleMarketplaceSubmit = (e) => {
+  const handleMarketplaceSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
     const { marketplaceName, marketplaceSlug, tags } = editMarketplaceItem;
+    await updateMarketplace({
+      marketplaceSlug,
+      marketplaceName,
+      tags,
+    });
+    setLoading(false);
+    toast("Marketplace updated successfully!");
+    localStorage.removeItem("marketplace_for_edit");
 
-    axios
-      .patch(import.meta.env.VITE_API_URI + "api/v1/update-marketplace", {
-        marketplaceName,
-        marketplaceSlug,
-        tags,
-      })
-      .then((res) => {
-        setLoading(false);
-        toast("Marketplace updated successfully!");
-
-        navigate("/marketplaces");
-      })
-      .catch((err) => console.log(err));
+    navigate("/marketplaces");
   };
 
   return (

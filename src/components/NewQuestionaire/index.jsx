@@ -7,15 +7,17 @@ import {
   TextField,
 } from "@mui/material";
 import React from "react";
+import { toast } from "react-toastify";
+import { newQuestionaire } from "../../api/Questionaire";
 import "./styles/style.css";
 
 export default function NewQuestionaire() {
+  const [loading, setLoading] = React.useState(false);
   const [formData, setFormData] = React.useState({
-    marketplaceSlug: "",
     bidPrice: 5,
     questionType: 3,
     poolType: "duo",
-    questions: ["", "", ""],
+    questionaires: ["", "", ""],
   });
 
   const [questionOne, setQuestionOne] = React.useState("");
@@ -42,30 +44,53 @@ export default function NewQuestionaire() {
     }
   };
 
+  const handleQuestionaireSubmit = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+
+    const { fixtureId, bidPrice, questionType, poolType, questions } = formData;
+
+    if (questionType === 3) {
+      const data = {
+        fixtureId: "124",
+        bidPrice,
+        questionType,
+        poolType,
+        questionaires: [questionOne, questionTwo, questionThree],
+      };
+
+      await newQuestionaire(data)
+    } else {
+      const data = {
+        fixtureId: "124",
+        bidPrice,
+        questionType,
+        poolType,
+        questionaires: [questionOne, questionTwo, questionThree, questionFour],
+      };
+
+      await newQuestionaire(data)
+    }
+
+    setLoading(true);
+    setFormData({
+      bidPrice: 5,
+      questionType: 3,
+      poolType: "duo",
+      questionaires: ["", "", ""],
+    });
+
+    setQuestionOne("")
+    setQuestionTwo("")
+    setQuestionThree("")
+    setQuestionFour("")
+    toast("Questionaire created successfully!");
+  };
+
   return (
     <div className="newQuestionaire__container">
       <h1>New Questionaire</h1>
 
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Marketplace</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={formData.marketplaceSlug}
-          label="Pool Type"
-          onChange={(e) =>
-            setFormData({
-              ...formData,
-              marketplaceSlug: e.target.value,
-            })
-          }
-        >
-          {/* This must be mapped from backend marketplace */}
-          {/* <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem> */}
-        </Select>
-      </FormControl>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Bid Price</InputLabel>
         <Select
@@ -96,7 +121,7 @@ export default function NewQuestionaire() {
             setFormData({
               ...formData,
               questionType: e.target.value,
-              questions: e.target.value === 3 ? ["", "", ""] : ["", "", "", ""],
+              questionaires: e.target.value === 3 ? ["", "", ""] : ["", "", "", ""],
             });
           }}
         >
@@ -138,14 +163,13 @@ export default function NewQuestionaire() {
                     : questionThree
                 }
                 id="outlined-basic"
-                label="Location"
+                label={`Question ${index + 1}`}
                 variant="outlined"
                 onChange={(e) => handleQuestionInput(index, e.target.value)}
               />
             );
           })
         : ["", "", "", ""].map((data, index) => {
-            console.log(index);
             return (
               <TextField
                 key={index}
@@ -159,13 +183,16 @@ export default function NewQuestionaire() {
                     : questionFour
                 }
                 id="outlined-basic"
-                label={`Question ${index+1}`}
+                label={`Question ${index + 1}`}
                 variant="outlined"
                 onChange={(e) => handleQuestionInput(index, e.target.value)}
               />
             );
           })}
-      <Button className="submitBtn" type="submit">
+      <Button
+        className="submitBtn"
+        onClick={(e) => handleQuestionaireSubmit(e)}
+      >
         Submit
       </Button>
       <Button>Reset</Button>

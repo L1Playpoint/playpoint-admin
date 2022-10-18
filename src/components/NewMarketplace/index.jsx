@@ -1,8 +1,8 @@
 import React from "react";
 import { Box, Button, TextField } from "@mui/material";
 import "./styles/style.css";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { newMarketplaces } from "../../api/Marketplace";
 
 export default function NewMarketplace() {
   const [newMarketplaceItem, setNewMarketplaceItem] = React.useState({
@@ -31,7 +31,7 @@ export default function NewMarketplace() {
     });
   };
 
-  const handleMarketplaceSubmit = (e) => {
+  const handleMarketplaceSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
     const formData = new FormData();
@@ -43,21 +43,17 @@ export default function NewMarketplace() {
     formData.append("marketplaceCoverImage", marketplaceCoverImage);
     formData.append("tags", tags);
 
-    // axios post request here
-    axios
-      .post(import.meta.env.VITE_API_URI + "api/v1/new-marketplace", formData)
-      .then((res) => {
-        setLoading(false);
-        toast("Marketplace created successfully!");
+    await newMarketplaces(formData)
 
-        setNewMarketplaceItem({
-          marketplaceSlug: "",
-          marketplaceName: "",
-          marketplaceCoverImage: null,
-          tags: "",
-        });
-      })
-      .catch((err) => console.log(err));
+    setLoading(false);
+    toast("Marketplace created successfully!");
+
+    setNewMarketplaceItem({
+      marketplaceSlug: "",
+      marketplaceName: "",
+      marketplaceCoverImage: null,
+      tags: "",
+    });
   };
 
   return (
@@ -65,7 +61,6 @@ export default function NewMarketplace() {
       <h1 className="header">New Markteplace</h1>
 
       <Box
-      aria-disabled={loading && "disabled"}
         component="form"
         sx={{
           "& > :not(style)": { m: 1, width: "25ch" },
@@ -96,12 +91,14 @@ export default function NewMarketplace() {
           }
         />
         <TextField
+          disabled={loading && true}
           id="outlined-basic"
           label="Marketplace Slug"
           variant="outlined"
           value={newMarketplaceItem.marketplaceSlug}
         />
         <TextField
+          disabled={loading && true}
           id="outlined-basic"
           label="Marketplace Name"
           variant="outlined"
@@ -109,6 +106,7 @@ export default function NewMarketplace() {
           onChange={handleMarketplaceSlug}
         />
         <TextField
+          disabled={loading && true}
           id="outlined-basic"
           label="Tags"
           variant="outlined"
@@ -120,10 +118,12 @@ export default function NewMarketplace() {
             })
           }
         />
-        <Button className="submitBtn" type="submit">
+        <Button disabled={loading && true} className="submitBtn" type="submit">
           Submit
         </Button>
-        <Button onClick={() => handleResetInputs()}>Reset</Button>
+        <Button disabled={loading && true} onClick={() => handleResetInputs()}>
+          Reset
+        </Button>
       </Box>
     </div>
   );

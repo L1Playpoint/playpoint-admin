@@ -5,9 +5,11 @@ import CountryFlags from "../../mocks/CountryFlags.json";
 import "./styles/style.css";
 import Fuse from "fuse.js";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { deleteFixture, getFixtures } from "../../api/Fixture";
 
 export default function Fixture() {
-  const [fixtures, setFixtures] = React.useState(Fixtures);
+  const [fixtures, setFixtures] = React.useState([]);
   const [filteredFixtures, setFilteredFixtures] = React.useState([]);
   const navigate = useNavigate();
 
@@ -22,8 +24,20 @@ export default function Fixture() {
     setFilteredFixtures(result);
   };
 
+  const handleFixtureDelete = async (_id) => {
+    toast("Marketplace added to delete queue!");
+    setFixtures(fixtures.filter((i) => i._id !== _id));
+    await deleteFixture(_id);
+    toast("Marketplace deleted successfully!");
+  };
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
+
+    (async () => {
+      const res = await getFixtures();
+      setFixtures(res.data.data.reverse());
+    })();
   }, []);
   return (
     <div className="fixture__container">
@@ -116,10 +130,13 @@ export default function Fixture() {
                     <Button className="editBtn">
                       <i className="ri-settings-line"></i> Edit
                     </Button>
-                    <Button className="editBtn">
+                    <Button onClick={() => navigate("/questionaires/new")} className="editBtn">
                       <i className="ri-message-3-line"></i> Add Questionaire
                     </Button>
-                    <Button className="deleteBtn">
+                    <Button
+                      className="deleteBtn"
+                      onClick={() => handleFixtureDelete(data._id)}
+                    >
                       <i className="ri-delete-bin-5-line"></i> Delete
                     </Button>
                   </div>
@@ -198,10 +215,13 @@ export default function Fixture() {
                     <Button className="editBtn">
                       <i className="ri-settings-line"></i> Edit
                     </Button>
-                    <Button className="editBtn">
+                    <Button onClick={() => navigate("/questionaires/new")} className="editBtn">
                       <i className="ri-message-3-line"></i> Add Questionaire
                     </Button>
-                    <Button className="deleteBtn">
+                    <Button
+                      className="deleteBtn"
+                      onClick={() => handleFixtureDelete(data._id)}
+                    >
                       <i className="ri-delete-bin-5-line"></i> Delete
                     </Button>
                   </div>
