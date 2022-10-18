@@ -35,9 +35,9 @@
   gap: 3vw;
 }
 .fixture__container .fixture__items .fixture__item {
-  max-width: 20.25vw;
+  max-width: 28vw;
   cursor: pointer;
-  min-width: 20.25vw;
+  min-width: 28vw;
   flex-direction: column;
   box-shadow: 0px 10px 21px 5px rgba(0, 0, 0, 0.1);
   padding: 15px;
@@ -63,6 +63,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-top: 5px;
 }
 .fixture__container .fixture__items .fixture__item .gameDetails span {
   display: flex;

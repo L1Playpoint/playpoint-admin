@@ -38,18 +38,19 @@ export default function Questionaires() {
       </div>
 
       <div className="questionaire__items">
-        <Button
+        {/* <Button
           className="questionaire__item newQuestionaire"
           onClick={() => navigate("new")}
         >
           <i className="ri-add-line"></i>
           <Typography variant="p">New Questionaire</Typography>
-        </Button>
+        </Button> */}
 
         {filteredQuestionaires.length > 0
           ? filteredQuestionaires.map((data, index) => {
               return (
                 <div className="questionaire__item" key={index}>
+                  <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="" loading="lazy"/>
                   <div className="marketplaceSlug">
                     <b>Marketplace</b>: {data?.item?.marketplaceSlug}
                   </div>
@@ -66,6 +67,12 @@ export default function Questionaires() {
                     <Button className="editBtn">
                       <i className="ri-settings-line"></i> Edit
                     </Button>
+                    <Button
+                      className="resultBtn"
+                      onClick={() => navigate("/results/new")}
+                    >
+                      <i className="ri-gamepad-line"></i> Set Result
+                    </Button>
                     <Button className="deleteBtn">
                       <i className="ri-delete-bin-5-line"></i> Delete
                     </Button>
@@ -76,6 +83,8 @@ export default function Questionaires() {
           : questionaires.map((data, index) => {
               return (
                 <div className="questionaire__item" key={index}>
+                  <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="" loading="lazy"/>
+
                   <div className="marketplaceSlug">
                     <b>Marketplace</b>: {data.marketplaceSlug}
                   </div>

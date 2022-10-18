@@ -35,7 +35,10 @@ export default function Fixture() {
       </div>
 
       <div className="fixture__items">
-        <Button className="fixture__item newFixture" onClick={() => navigate("new")}>
+        <Button
+          className="fixture__item newFixture"
+          onClick={() => navigate("new")}
+        >
           <i className="ri-add-line"></i>
           <Typography variant="p">New Fixture</Typography>
         </Button>
@@ -112,6 +115,9 @@ export default function Fixture() {
                   <div className="actions">
                     <Button className="editBtn">
                       <i className="ri-settings-line"></i> Edit
+                    </Button>
+                    <Button className="editBtn">
+                      <i className="ri-message-3-line"></i> Add Questionaire
                     </Button>
                     <Button className="deleteBtn">
                       <i className="ri-delete-bin-5-line"></i> Delete
@@ -191,6 +197,9 @@ export default function Fixture() {
                   <div className="actions">
                     <Button className="editBtn">
                       <i className="ri-settings-line"></i> Edit
+                    </Button>
+                    <Button className="editBtn">
+                      <i className="ri-message-3-line"></i> Add Questionaire
                     </Button>
                     <Button className="deleteBtn">
                       <i className="ri-delete-bin-5-line"></i> Delete
