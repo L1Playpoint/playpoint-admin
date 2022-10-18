@@ -1,19 +1,21 @@
 import { Button, Typography } from "@mui/material";
 import React from "react";
-import QuestionairesList from "../../mocks/Questionaires.json";
+// import QuestionairesList from "../../mocks/Questionaires.json";
 import "./styles/style.css";
 import Fuse from "fuse.js";
 import { useNavigate } from "react-router-dom";
+import { deleteQuestionaire, getQuestionaires } from "../../api/Questionaire";
+import { toast } from "react-toastify";
 
 export default function Questionaires() {
-  const [questionaires, setQuestionaires] = React.useState(QuestionairesList);
+  const [questionaires, setQuestionaires] = React.useState([]);
   const [filteredQuestionaires, setFilteredQuestionaires] = React.useState([]);
   const navigate = useNavigate();
 
   const filter = (e) => {
     const options = {
       includeScore: true,
-      keys: ["questions", "marketplaceSlug"],
+      keys: ["questionaires", "marketplaceSlug"],
     };
 
     const fuse = new Fuse(QuestionairesList, options);
@@ -23,7 +25,20 @@ export default function Questionaires() {
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
+
+    (async () => {
+      const res = await getQuestionaires();
+
+      setQuestionaires(res.data.data.reverse());
+    })();
   }, []);
+
+  const handleQuestinaireDelete = async (_id) => {
+    toast("Marketplace added to delete queue!");
+    setQuestionaires(questionaires.filter((i) => i._id !== _id));
+    await deleteQuestionaire(_id);
+    toast("Marketplace deleted successfully!");
+  };
   return (
     <div className="questionaire__container">
       <h1 className="title">Active Questionaires</h1>
@@ -59,7 +74,7 @@ export default function Questionaires() {
                   </div>
 
                   <ul>
-                    {data?.item?.questions.map((question, index) => {
+                    {data?.item?.questionaires.map((question, index) => {
                       return <li key={index}>{question}</li>;
                     })}
                   </ul>
@@ -73,7 +88,7 @@ export default function Questionaires() {
                     >
                       <i className="ri-gamepad-line"></i> Set Result
                     </Button>
-                    <Button className="deleteBtn">
+                    <Button onClick={() => handleQuestinaireDelete(data._id)} className="deleteBtn">
                       <i className="ri-delete-bin-5-line"></i> Delete
                     </Button>
                   </div>
@@ -93,7 +108,7 @@ export default function Questionaires() {
                   </div>
 
                   <ul>
-                    {data.questions.map((question, index) => {
+                    {data?.questionaires.map((question, index) => {
                       return <li key={index}>{question}</li>;
                     })}
                   </ul>
@@ -107,7 +122,7 @@ export default function Questionaires() {
                     >
                       <i className="ri-gamepad-line"></i> Set Result
                     </Button>
-                    <Button className="deleteBtn">
+                    <Button onClick={() => handleQuestinaireDelete(data._id)} className="deleteBtn">
                       <i className="ri-delete-bin-5-line"></i> Delete
                     </Button>
                   </div>
@@ -116,5 +131,6 @@ export default function Questionaires() {
             })}
       </div>
     </div>
+    
   );
 }

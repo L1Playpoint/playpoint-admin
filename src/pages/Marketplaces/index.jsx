@@ -22,7 +22,7 @@ export default function Markteplaces() {
     setFilteredMarketplaces(result);
   };
 
-  const handleMarketplaceDelete = async (marketplaceSlug, index) => {
+  const handleMarketplaceDelete = async (marketplaceSlug) => {
     toast("Marketplace added to delete queue!");
     setMarketplaces(
       marketplaces.filter((i) => i.marketplaceSlug !== marketplaceSlug)
@@ -156,7 +156,7 @@ export default function Markteplaces() {
                   </Button>
                   <Button
                     onClick={() =>
-                      handleMarketplaceDelete(data.marketplaceSlug, index)
+                      handleMarketplaceDelete(data.marketplaceSlug)
                     }
                     className="deleteBtn"
                   >

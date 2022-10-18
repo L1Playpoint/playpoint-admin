@@ -12,13 +12,17 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import "./styles/style.css";
+import { getMarketplaces } from "../../api/Marketplace";
+import { newFixture } from "../../api/Fixture";
+import { toast } from "react-toastify";
 
 export default function NewFixture() {
+  const [marketplaces, setMarketplaces] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+
   const [newFixtureItem, setNewFixtureItem] = React.useState({
     HomeTeam: "",
     AwayTeam: "",
-    HomeTeamIcon: null,
-    AwayTeamIcon: null,
     HomeTeamScore: "",
     AwayTeamScore: "",
     marketplaceSlug: "",
@@ -33,8 +37,6 @@ export default function NewFixture() {
     setNewFixtureItem({
       HomeTeam: "",
       AwayTeam: "",
-      HomeTeamIcon: null,
-      AwayTeamIcon: null,
       HomeTeamScore: "",
       AwayTeamScore: "",
       marketplaceSlug: "",
@@ -45,6 +47,60 @@ export default function NewFixture() {
       DateUtc: null,
     });
   };
+
+  const handleFixtureSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const {
+      marketplaceSlug,
+      MatchNumber,
+      RoundNumber,
+      DateUtc,
+      Location,
+      HomeTeam,
+      AwayTeam,
+      Group,
+      HomeTeamScore,
+      AwayTeamScore,
+    } = newFixtureItem;
+
+    await newFixture({
+      marketplaceSlug,
+      MatchNumber,
+      RoundNumber,
+      DateUtc,
+      Location,
+      HomeTeam,
+      AwayTeam,
+      Group,
+      HomeTeamScore,
+      AwayTeamScore,
+    });
+
+    setLoading(false);
+    toast("Fixture created successfully!");
+    setNewFixtureItem({
+      HomeTeam: "",
+      AwayTeam: "",
+      HomeTeamScore: "",
+      AwayTeamScore: "",
+      marketplaceSlug: "",
+      MatchNumber: 0,
+      RoundNumber: 0,
+      Location: "",
+      Group: "",
+      DateUtc: null,
+    });
+  };
+
+  React.useEffect(() => {
+    (async () => {
+      const res = await getMarketplaces();
+      const arr = res.data.data.reverse();
+      setMarketplaces(arr);
+    })();
+  }, []);
 
   return (
     <div className="newFixture__container">
@@ -58,9 +114,11 @@ export default function NewFixture() {
         noValidate
         autoComplete="off"
         className="newMarketplaceForm__container"
+        onSubmit={handleFixtureSubmit}
       >
         <div className="fixtureFormat">
           <TextField
+            disabled={loading && true}
             value={newFixtureItem.HomeTeam}
             id="outlined-basic"
             label="Home Team"
@@ -69,7 +127,7 @@ export default function NewFixture() {
               setNewFixtureItem({ ...newFixtureItem, HomeTeam: e.target.value })
             }
           />
-          <img
+          {/* <img
             src={
               newFixtureItem.HomeTeamIcon
                 ? URL.createObjectURL(newFixtureItem.HomeTeamIcon)
@@ -77,9 +135,9 @@ export default function NewFixture() {
             }
             alt=""
             loading="lazy"
-          />
+          /> */}
           <p>vs</p>
-          <img
+          {/* <img
             src={
               newFixtureItem.AwayTeamIcon
                 ? URL.createObjectURL(newFixtureItem.AwayTeamIcon)
@@ -87,8 +145,9 @@ export default function NewFixture() {
             }
             alt=""
             loading="lazy"
-          />
+          /> */}
           <TextField
+            disabled={loading && true}
             value={newFixtureItem.AwayTeam}
             id="outlined-basic"
             label="Away Team"
@@ -98,7 +157,7 @@ export default function NewFixture() {
             }
           />
         </div>
-        <div className="imageInputs">
+        {/* <div className="imageInputs">
           <input
             type="file"
             name="HomeTeamIcon"
@@ -120,7 +179,7 @@ export default function NewFixture() {
               })
             }
           />
-        </div>
+        </div> */}
 
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Marketplace</InputLabel>
@@ -136,14 +195,19 @@ export default function NewFixture() {
               })
             }
           >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            {marketplaces?.map((data, index) => {
+              return (
+                <MenuItem key={index} value={data.marketplaceSlug}>
+                  {data.marketplaceName}
+                </MenuItem>
+              );
+            })}
           </Select>
         </FormControl>
 
         <div className="gameInfos">
           <TextField
+            disabled={loading && true}
             id="outlined-basic"
             label="Match Number"
             variant="outlined"
@@ -157,6 +221,7 @@ export default function NewFixture() {
             }
           />
           <TextField
+            disabled={loading && true}
             id="outlined-basic"
             label="Round Number"
             variant="outlined"
@@ -170,6 +235,7 @@ export default function NewFixture() {
             }
           />
           <TextField
+            disabled={loading && true}
             value={newFixtureItem.Group}
             id="outlined-basic"
             label="Group"
@@ -193,11 +259,14 @@ export default function NewFixture() {
                 DateUtc: newValue,
               });
             }}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => (
+              <TextField disabled={loading && true} {...params} />
+            )}
           />
         </LocalizationProvider>
 
         <TextField
+          disabled={loading && true}
           value={newFixtureItem.Location}
           id="outlined-basic"
           label="Location"

@@ -8,6 +8,16 @@ export const getMarketplaces = async () => {
   return marketplaces;
 };
 
+export const newMarketplaces = async (data) => {
+  await axios
+  .post(import.meta.env.VITE_API_URI + "api/v1/new-marketplace", data)
+}
+
+export const updateMarketplace = async (data) => {
+  await axios
+      .patch(import.meta.env.VITE_API_URI + "api/v1/update-marketplace", data)
+}
+
 export const deleteMarketplace = async (slug) => {
   await axios.delete(
     import.meta.env.VITE_API_URI + "api/v1/delete-marketplace",
