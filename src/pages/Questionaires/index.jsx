@@ -79,7 +79,7 @@ export default function Questionaires() {
                     })}
                   </ul>
                   <div className="actions">
-                    <Button className="editBtn">
+                    <Button onClick={() => navigate("edit")} className="editBtn">
                       <i className="ri-settings-line"></i> Edit
                     </Button>
                     <Button
@@ -88,7 +88,7 @@ export default function Questionaires() {
                     >
                       <i className="ri-gamepad-line"></i> Set Result
                     </Button>
-                    <Button onClick={() => handleQuestinaireDelete(data._id)} className="deleteBtn">
+                    <Button onClick={() => handleQuestinaireDelete(data.item._id)} className="deleteBtn">
                       <i className="ri-delete-bin-5-line"></i> Delete
                     </Button>
                   </div>
@@ -113,7 +113,7 @@ export default function Questionaires() {
                     })}
                   </ul>
                   <div className="actions">
-                    <Button className="editBtn">
+                    <Button onClick={() => navigate("edit")} className="editBtn">
                       <i className="ri-settings-line"></i> Edit
                     </Button>
                     <Button

@@ -102,10 +102,9 @@ export default function Markteplaces() {
                       <i className="ri-attachment-line"></i> Add Fixture
                     </Button>
                     <Button
-                      onClick={handleMarketplaceDelete(
-                        data.item.marketplaceSlug,
-                        index
-                      )}
+                      onClick={() =>
+                        handleMarketplaceDelete(data.item.marketplaceSlug)
+                      }
                       className="deleteBtn"
                     >
                       <i className="ri-delete-bin-5-line"></i> Delete
@@ -142,7 +141,10 @@ export default function Markteplaces() {
                   <Button
                     className="editBtn"
                     onClick={() => {
-                      localStorage.setItem("marketplace_for_edit", JSON.stringify(data));
+                      localStorage.setItem(
+                        "marketplace_for_edit",
+                        JSON.stringify(data)
+                      );
                       navigate("edit");
                     }}
                   >

@@ -1,6 +1,5 @@
 import { Button, Typography } from "@mui/material";
 import React from "react";
-import Fixtures from "../../mocks/Fixtures.json";
 import CountryFlags from "../../mocks/CountryFlags.json";
 import "./styles/style.css";
 import Fuse from "fuse.js";
@@ -127,7 +126,7 @@ export default function Fixture() {
                   </div>
 
                   <div className="actions">
-                    <Button className="editBtn">
+                    <Button className="editBtn" onClick={() => navigate("edit")}>
                       <i className="ri-settings-line"></i> Edit
                     </Button>
                     <Button onClick={() => navigate("/questionaires/new")} className="editBtn">
@@ -135,7 +134,7 @@ export default function Fixture() {
                     </Button>
                     <Button
                       className="deleteBtn"
-                      onClick={() => handleFixtureDelete(data._id)}
+                      onClick={() => handleFixtureDelete(data.item._id)}
                     >
                       <i className="ri-delete-bin-5-line"></i> Delete
                     </Button>
@@ -212,7 +211,7 @@ export default function Fixture() {
                   </div>
 
                   <div className="actions">
-                    <Button className="editBtn">
+                    <Button className="editBtn" onClick={() => navigate("edit")}>
                       <i className="ri-settings-line"></i> Edit
                     </Button>
                     <Button onClick={() => navigate("/questionaires/new")} className="editBtn">

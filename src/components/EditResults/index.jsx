@@ -2,9 +2,9 @@ import { Button, TextField } from "@mui/material";
 import React from "react";
 import { toast } from "react-toastify";
 import { newResults } from "../../api/Results";
-import "./styles/style.css";
+// import "./styles/style.css";
 
-export default function NewResult() {
+export default function EditResult() {
   const [loading, setLoading] = React.useState(false)
   const [result, setResult] = React.useState({
     questionaireId: "",
@@ -48,7 +48,7 @@ export default function NewResult() {
 
   return (
     <div className="newresult__container">
-      <h1>New Result</h1>
+      <h1>Edit Result</h1>
 
       <TextField label="Questionaire ID" value={result.questionaireId} onChange={e => setResult({...result, questionaireId: e.target.value})}/>
       <TextField

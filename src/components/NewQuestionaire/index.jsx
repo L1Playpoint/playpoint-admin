@@ -44,6 +44,20 @@ export default function NewQuestionaire() {
     }
   };
 
+  const handleResetInputs = () => {
+    setFormData({
+      bidPrice: 5,
+      questionType: 3,
+      poolType: "duo",
+      questionaires: ["", "", ""],
+    });
+
+    setQuestionOne("")
+    setQuestionTwo("")
+    setQuestionThree("")
+    setQuestionFour("")
+  }
+
   const handleQuestionaireSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -72,18 +86,8 @@ export default function NewQuestionaire() {
       await newQuestionaire(data)
     }
 
-    setLoading(true);
-    setFormData({
-      bidPrice: 5,
-      questionType: 3,
-      poolType: "duo",
-      questionaires: ["", "", ""],
-    });
-
-    setQuestionOne("")
-    setQuestionTwo("")
-    setQuestionThree("")
-    setQuestionFour("")
+    setLoading(false);
+    handleResetInputs()
     toast("Questionaire created successfully!");
   };
 
@@ -94,6 +98,7 @@ export default function NewQuestionaire() {
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Bid Price</InputLabel>
         <Select
+        disabled={loading && true}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={formData.bidPrice}
@@ -113,6 +118,7 @@ export default function NewQuestionaire() {
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Question Type</InputLabel>
         <Select
+        disabled={loading && true}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={formData.questionType}
@@ -132,6 +138,7 @@ export default function NewQuestionaire() {
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Pool Type</InputLabel>
         <Select
+        disabled={loading && true}
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={formData.poolType}
@@ -172,6 +179,7 @@ export default function NewQuestionaire() {
         : ["", "", "", ""].map((data, index) => {
             return (
               <TextField
+              disabled={loading && true}
                 key={index}
                 value={
                   index === 0
