@@ -80,18 +80,7 @@ export default function NewFixture() {
 
     setLoading(false);
     toast("Fixture created successfully!");
-    setNewFixtureItem({
-      HomeTeam: "",
-      AwayTeam: "",
-      HomeTeamScore: "",
-      AwayTeamScore: "",
-      marketplaceSlug: "",
-      MatchNumber: 0,
-      RoundNumber: 0,
-      Location: "",
-      Group: "",
-      DateUtc: null,
-    });
+    resetInputs();
   };
 
   React.useEffect(() => {

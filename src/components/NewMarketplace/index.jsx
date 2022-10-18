@@ -48,12 +48,7 @@ export default function NewMarketplace() {
     setLoading(false);
     toast("Marketplace created successfully!");
 
-    setNewMarketplaceItem({
-      marketplaceSlug: "",
-      marketplaceName: "",
-      marketplaceCoverImage: null,
-      tags: "",
-    });
+    handleResetInputs()
   };
 
   return (
